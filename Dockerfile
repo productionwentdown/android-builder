@@ -58,10 +58,10 @@ ENV RUN_USER builder
 ENV RUN_UID 5000
 
 RUN id $RUN_USER || adduser --uid "$RUN_UID" \
-    --gecos 'Build User' \
-    --shell '/bin/sh' \
-    --disabled-login \
-    --disabled-password "$RUN_USER"
+  --gecos 'Build User' \
+  --shell '/bin/sh' \
+  --disabled-login \
+  --disabled-password "$RUN_USER"
 
 # Fix permissions
 RUN chown -R $RUN_USER:$RUN_USER $ANDROID_HOME

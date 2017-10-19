@@ -27,11 +27,19 @@ RUN apt-get update \
 
 # Install Android SDK
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VERSION.zip \
-  && unzip sdk-tools-linux-$ANDROID_SDK_VERSION.zip \
-  && mv tools /usr/local/android-tools \
+  && mkdir /usr/local/android \
+  && unzip sdk-tools-linux-$ANDROID_SDK_VERSION.zip -d /usr/local/android \
   && rm sdk-tools-linux-$ANDROID_SDK_VERSION.zip
 
-RUN echo -e "y\ny\ny\ny\ny\ny" | /usr/local/android-tools/bin/sdkmanager \
+# Environment variables
+ENV ANDROID_HOME /usr/local/android
+ENV PATH $ANDROID_HOME/tools/bin:$PATH
+
+# Export JAVA_HOME variable
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+
+# Install Android SDK components
+RUN echo -e "y\ny\ny\ny\ny\ny" | sdkmanager \
   "platform-tools" \
   "platforms;android-26" \
   "build-tools;26.0.2" \
@@ -39,16 +47,6 @@ RUN echo -e "y\ny\ny\ny\ny\ny" | /usr/local/android-tools/bin/sdkmanager \
   "ndk-bundle" \
   "lldb;2.3" \
   "cmake;3.6.4111459"
-
-# Environment variables
-ENV ANDROID_HOME /usr/local/android-tools
-ENV PATH $ANDROID_HOME:$PATH
-ENV PATH $ANDROID_HOME/platform-tools:$PATH
-ENV PATH $ANDROID_HOME/tools:$PATH
-ENV PATH $ANDROID_HOME/bin:$PATH
-
-# Export JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 
 # Support Gradle
 ENV TERM dumb

@@ -31,7 +31,7 @@ RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_V
   && mv tools /usr/local/android-tools \
   && rm sdk-tools-linux-$ANDROID_SDK_VERSION.zip
 
-RUN echo y | /usr/local/android-tools/bin/sdkmanager \
+RUN echo -e 'y\ny\ny\ny\ny' | /usr/local/android-tools/bin/sdkmanager \
   "platform-tools" \
   "platforms;android-26" \
   "build-tools;26.0.2" \

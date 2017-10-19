@@ -41,7 +41,7 @@ ENV PATH $ANDROID_HOME/tools/bin:$PATH
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # Install Android SDK components
-RUN echo -e "y\ny\ny\ny\ny\ny" | sdkmanager \
+RUN (sleep 5; echo -e "y\ny\ny\ny\ny\ny") | sdkmanager \
   "platform-tools" \
   "platforms;android-26" \
   "build-tools;26.0.2" \

@@ -9,20 +9,20 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV ANDROID_SDK_VERSION 3859397
 
 # Update apt-get
-RUN apt-get update -q \
-  && apt-get install -y --no-install-recommends -q \
+RUN apt-get -q update \
+  && apt-get -q install -y --no-install-recommends \
       ca-certificates \
       build-essential \
       software-properties-common \
       unzip \
       wget \
       zip \
-  && apt-add-repository ppa:openjdk-r/ppa -q \
-  && apt-get update -q \
-  && apt-get install -y openjdk-8-jdk -q \
+  && apt-add-repository ppa:openjdk-r/ppa \
+  && apt-get -q update \
+  && apt-get -q install -y openjdk-8-jdk \
       -o Dpkg::Options::="--force-overwrite" \
-  && apt-get autoremove -y -q \
-  && apt-get clean -q \
+  && apt-get -q autoremove -y \
+  && apt-get -q clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Install Android SDK

@@ -19,7 +19,7 @@ RUN apt-get update \
       zip \
   && apt-add-repository ppa:openjdk-r/ppa \
   && apt-get update \
-  && apt-get install -y openjdk-9-jdk \
+  && apt-get install -y openjdk-8-jdk \
       -o Dpkg::Options::="--force-overwrite" \
   && apt-get autoremove -y \
   && apt-get clean \
@@ -48,7 +48,7 @@ ENV PATH $ANDROID_HOME/tools:$PATH
 ENV PATH $ANDROID_HOME/bin:$PATH
 
 # Export JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk-amd64/
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 
 # Support Gradle
 ENV TERM dumb

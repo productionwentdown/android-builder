@@ -9,26 +9,26 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV ANDROID_SDK_VERSION 3859397
 
 # Update apt-get
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
+RUN apt-get update -q \
+  && apt-get install -y --no-install-recommends -q \
       ca-certificates \
       build-essential \
       software-properties-common \
       unzip \
       wget \
       zip \
-  && apt-add-repository ppa:openjdk-r/ppa \
-  && apt-get update \
-  && apt-get install -y openjdk-8-jdk \
+  && apt-add-repository ppa:openjdk-r/ppa -q \
+  && apt-get update -q \
+  && apt-get install -y openjdk-8-jdk -q \
       -o Dpkg::Options::="--force-overwrite" \
-  && apt-get autoremove -y \
-  && apt-get clean \
+  && apt-get autoremove -y -q \
+  && apt-get clean -q \
   && rm -rf /var/lib/apt/lists/*
 
 # Install Android SDK
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VERSION.zip -q \
   && mkdir /usr/local/android \
-  && unzip sdk-tools-linux-$ANDROID_SDK_VERSION.zip -d /usr/local/android \
+  && unzip sdk-tools-linux-$ANDROID_SDK_VERSION.zip -d /usr/local/android -q \
   && rm sdk-tools-linux-$ANDROID_SDK_VERSION.zip
 
 # Environment variables

@@ -11,6 +11,7 @@ ENV ANDROID_SDK_VERSION 3859397
 # Update apt-get
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
+      ca-certificates \
       build-essential \
       software-properties-common \
       unzip \

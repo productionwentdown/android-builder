@@ -28,7 +28,7 @@ RUN apt-get -qq update \
 # Install Android SDK
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VERSION.zip -q \
   && mkdir /usr/local/android \
-  && unzip sdk-tools-linux-$ANDROID_SDK_VERSION.zip -d /usr/local/android -q \
+  && unzip -q sdk-tools-linux-$ANDROID_SDK_VERSION.zip -d /usr/local/android \
   && rm sdk-tools-linux-$ANDROID_SDK_VERSION.zip
 
 # Environment variables

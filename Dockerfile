@@ -26,7 +26,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # Install Android SDK
-RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VERSION.zip \
+RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VERSION.zip -q \
   && mkdir /usr/local/android \
   && unzip sdk-tools-linux-$ANDROID_SDK_VERSION.zip -d /usr/local/android \
   && rm sdk-tools-linux-$ANDROID_SDK_VERSION.zip

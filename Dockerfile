@@ -46,9 +46,9 @@ RUN echo "y" | sdkmanager \
   "platforms;android-26" \
   "build-tools;26.0.2" \
   \
-  "ndk-bundle" \
-  "lldb;2.3" \
-  "cmake;3.6.4111459"
+#  "ndk-bundle" \
+#  "lldb;2.3" \
+#  "cmake;3.6.4111459"
 
 # Support Gradle
 ENV TERM dumb

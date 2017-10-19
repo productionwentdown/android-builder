@@ -11,8 +11,6 @@ ENV ANDROID_SDK_VERSION 3859397
 # Update apt-get
 RUN apt-get -qq update \
   && apt-get -qq install -y --no-install-recommends \
-      ca-certificates \
-      build-essential \
       software-properties-common \
       unzip \
       wget \
@@ -42,13 +40,13 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # Install Android SDK components
 RUN echo "y" | sdkmanager \
-  "platform-tools" \
-  "platforms;android-26" \
-  "build-tools;26.0.2" \
-  \
 #  "ndk-bundle" \
 #  "lldb;2.3" \
-#  "cmake;3.6.4111459"
+#  "cmake;3.6.4111459" \
+  "platform-tools" \
+  "platforms;android-26" \
+  "build-tools;26.0.2"
+
 
 # Support Gradle
 ENV TERM dumb

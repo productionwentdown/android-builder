@@ -33,6 +33,8 @@ RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_V
 
 # Environment variables
 ENV ANDROID_HOME /usr/local/android
+ENV ANDROID_SDK_HOME $ANDROID_HOME
+ENV ANDROID_NDK_HOME $ANDROID_HOME/ndk-bundle
 ENV PATH $ANDROID_HOME/tools/bin:$PATH
 
 # Export JAVA_HOME variable

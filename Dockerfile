@@ -1,9 +1,9 @@
 # Android Dockerfile based on uber/android-build-environment
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 # SDK version
-ENV ANDROID_SDK_VERSION 3859397
+ENV ANDROID_SDK_VERSION 4333796
 
 # Never ask for confirmations
 ENV DEBIAN_FRONTEND noninteractive
@@ -45,10 +45,10 @@ RUN echo "y" | sdkmanager \
 #  "cmake;3.6.4111459" \
   "extras;google;m2repository" \
   "platform-tools" \
-  "platforms;android-26" \
-  "build-tools;26.0.2"
+  "platforms;android-28" \
+  "build-tools;28.0.2"
 
-# Add more build tools
+# Add release helper
 COPY release /usr/local/bin/release
 
 # Build directory

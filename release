@@ -6,7 +6,7 @@ BUILT_APK=app/build/outputs/apk/app-unsigned.apk
 ALIGNED_APK=app/build/outputs/apk/app-unsigned-aligned.apk
 SIGNED_APK=app/build/outputs/apk/app-release.apk
 
-TEMP_DIR="$(mktemp)"
+TEMP_DIR="$(mktemp -d)"
 TEMP_STORE_FILE="$TEMP_DIR/store.jks"
 
 if [ -z "$store_file" ] || [ -z "$store_password" ] || [ -z "$key_alias" ]; then

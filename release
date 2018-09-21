@@ -9,20 +9,20 @@ SIGNED_APK=app/build/outputs/apk/app-release.apk
 TEMP_DIR="$(mktemp -d)"
 TEMP_STORE_FILE="$TEMP_DIR/store.jks"
 
-if [ -z "$store_file" ] || [ -z "$store_password" ] || [ -z "$key_alias" ]; then
-    echo "store_file, store_password or key_alias are not configured secrets. Aborting..."
+if [ -z "$STORE_FILE" ] || [ -z "$STORE_PASSWORD" ] || [ -z "$key_alias" ]; then
+    echo "STORE_FILE, STORE_PASSWORD or key_alias are not configured secrets. Aborting..."
     exit 1
 fi
 
 echo
-echo "Reading store_file from environment"
-echo $store_file | xxd -ps -r > $TEMP_STORE_FILE
+echo "Reading STORE_FILE from environment"
+echo $STORE_FILE | xxd -ps -r > $TEMP_STORE_FILE
 
 # The following file is not required for the following process
 # but I'm gonna leave it here anyway
 echo > keystore.properties << EOF
 storeFile=$TEMP_STORE_FILE
-storePassword=$store_password
+storePassword=$STORE_PASSWORD
 keyAlias=$key_alias
 EOF
 
@@ -47,7 +47,7 @@ echo "Signing"
 set -x
 apksigner sign \
     --ks $TEMP_STORE_FILE \
-    --ks-pass pass:$store_password \
+    --ks-pass pass:$STORE_PASSWORD \
     --ks-key-alias $key_alias \
     --out $SIGNED_APK \
     $ALIGNED_APK

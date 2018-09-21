@@ -15,6 +15,7 @@ RUN apt-get -qq update \
       unzip \
       wget \
       zip \
+      xxd \
   && apt-add-repository ppa:openjdk-r/ppa \
   && apt-get -qq update \
   && apt-get -qq install -y openjdk-8-jdk \

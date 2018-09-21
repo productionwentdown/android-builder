@@ -28,7 +28,7 @@ EOF
 
 echo
 echo "I think you're lazy so we will build a unsigned release APK and then sign it manually,"
-ecoh "rather than using the gradle process."
+echo "rather than using the gradle process."
 
 echo
 echo "Building unsigned release APK"

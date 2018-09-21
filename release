@@ -9,8 +9,8 @@ SIGNED_APK=app/build/outputs/apk/app-release.apk
 TEMP_DIR="$(mktemp -d)"
 TEMP_STORE_FILE="$TEMP_DIR/store.jks"
 
-if [ -z "$STORE_FILE" ] || [ -z "$STORE_PASSWORD" ] || [ -z "$key_alias" ]; then
-    echo "STORE_FILE, STORE_PASSWORD or key_alias are not configured secrets. Aborting..."
+if [ -z "$STORE_FILE" ] || [ -z "$STORE_PASSWORD" ] || [ -z "$KEY_ALIAS" ]; then
+    echo "STORE_FILE, STORE_PASSWORD or KEY_ALIAS are not configured secrets. Aborting..."
     exit 1
 fi
 
@@ -23,7 +23,7 @@ echo $STORE_FILE | xxd -ps -r > $TEMP_STORE_FILE
 echo > keystore.properties << EOF
 storeFile=$TEMP_STORE_FILE
 storePassword=$STORE_PASSWORD
-keyAlias=$key_alias
+keyAlias=$KEY_ALIAS
 EOF
 
 echo
@@ -48,7 +48,7 @@ set -x
 apksigner sign \
     --ks $TEMP_STORE_FILE \
     --ks-pass pass:$STORE_PASSWORD \
-    --ks-key-alias $key_alias \
+    --ks-key-alias $KEY_ALIAS \
     --out $SIGNED_APK \
     $ALIGNED_APK
 set +x

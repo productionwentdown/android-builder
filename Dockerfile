@@ -43,9 +43,13 @@ RUN echo "y" | sdkmanager \
 #  "ndk-bundle" \
 #  "lldb;2.3" \
 #  "cmake;3.6.4111459" \
+  "extras;google;m2repository" \
   "platform-tools" \
   "platforms;android-26" \
   "build-tools;26.0.2"
+
+# Add more build tools
+COPY release /usr/local/bin/release
 
 # Build directory
 ENV SRC /src

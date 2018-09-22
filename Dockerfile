@@ -4,6 +4,8 @@ FROM ubuntu:18.04
 
 # SDK version
 ENV ANDROID_SDK_VERSION 4333796
+ENV PLATFORM_VERSION 28
+ENV BUILD_TOOLS_VERSION 28.0.2
 
 # Never ask for confirmations
 ENV DEBIAN_FRONTEND noninteractive
@@ -37,7 +39,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV ANDROID_HOME /usr/local/android
 ENV ANDROID_SDK_HOME $ANDROID_HOME
 ENV ANDROID_NDK_HOME $ANDROID_HOME/ndk-bundle
-ENV PATH $ANDROID_HOME/tools/bin:$PATH
+ENV PATH $ANDROID_HOME/tools/bin:$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION:$PATH
 
 # Install Android SDK components
 RUN echo "y" | sdkmanager \
@@ -46,8 +48,8 @@ RUN echo "y" | sdkmanager \
 #  "cmake;3.6.4111459" \
   "extras;google;m2repository" \
   "platform-tools" \
-  "platforms;android-28" \
-  "build-tools;28.0.2"
+  "platforms;android-$PLATFORM_VERSION" \
+  "build-tools;$BUILD_TOOLS_VERSION"
 
 # Add release helper
 COPY release /usr/local/bin/release

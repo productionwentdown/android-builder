@@ -1,6 +1,6 @@
 pipeline:
   build:
-    image: 127.0.0.1:5001/builder-android
+    image: productionwentdown/builder-android
     commands:
     - release
   release:

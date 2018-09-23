@@ -2,9 +2,11 @@
 
 set -e
 
-BUILT_APK=app/build/outputs/apk/app-unsigned.apk
-ALIGNED_APK=app/build/outputs/apk/app-unsigned-aligned.apk
-SIGNED_APK=app/build/outputs/apk/app-release.apk
+BUILT_APK=none
+ALIGNED_APK=app/build/outputs/apk/release/app-release-unsigned-aligned.apk
+SIGNED_APK=app/build/outputs/apk/release/app-release.apk
+# Ensure directory exists
+mkdir -p app/build/outputs/apk/release/
 
 TEMP_DIR="$(mktemp -d)"
 TEMP_STORE_FILE="$TEMP_DIR/store.jks"
@@ -35,6 +37,8 @@ echo "Building unsigned release APK"
 set -x
 ./gradlew assembleRelease
 set +x
+
+BUILT_APK=$(find . -name "*.apk")
 
 echo
 echo "Doing zipalign"

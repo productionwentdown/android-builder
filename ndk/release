@@ -1,0 +1,66 @@
+#!/bin/sh
+
+set -e
+
+BUILT_APK=none
+ALIGNED_APK=app/build/outputs/apk/release/app-release-unsigned-aligned.apk
+SIGNED_APK=app/build/outputs/apk/release/app-release.apk
+# Ensure directory exists
+mkdir -p app/build/outputs/apk/release/
+
+TEMP_DIR="$(mktemp -d)"
+TEMP_STORE_FILE="$TEMP_DIR/store.jks"
+
+if [ -z "$STORE_FILE" ] || [ -z "$STORE_PASSWORD" ] || [ -z "$KEY_ALIAS" ]; then
+    echo "STORE_FILE, STORE_PASSWORD or KEY_ALIAS are not configured secrets. Aborting..."
+    exit 1
+fi
+
+echo
+echo "Reading STORE_FILE from environment"
+echo $STORE_FILE | xxd -ps -r > $TEMP_STORE_FILE
+
+# The following file is not required for the following process
+# but I'm gonna leave it here anyway
+echo > keystore.properties << EOF
+storeFile=$TEMP_STORE_FILE
+storePassword=$STORE_PASSWORD
+keyAlias=$KEY_ALIAS
+EOF
+
+echo
+echo "I think you're lazy so we will build a unsigned release APK and then sign it manually,"
+echo "rather than using the gradle process."
+
+echo
+echo "Building unsigned release APK"
+set -x
+./gradlew assembleRelease
+set +x
+
+BUILT_APK=$(find . -name "*.apk")
+
+echo
+echo "Doing zipalign"
+set -x
+zipalign -v -p 4 $BUILT_APK $ALIGNED_APK
+set +x
+
+echo
+echo "Signing"
+set -x
+apksigner sign \
+    --ks $TEMP_STORE_FILE \
+    --ks-pass pass:$STORE_PASSWORD \
+    --ks-key-alias $KEY_ALIAS \
+    --out $SIGNED_APK \
+    $ALIGNED_APK
+set +x
+
+echo
+echo "Verifying"
+set -x
+apksigner verify $SIGNED_APK
+set +x
+
+echo "Done!"

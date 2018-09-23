@@ -47,6 +47,7 @@ git tag $ANDROID_SDK_VERSION
 
 echo "+ Pushing"
 
+git push
 git push --tags
 
 echo "+ Done!"

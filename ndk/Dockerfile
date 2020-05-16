@@ -27,10 +27,10 @@ RUN apt-get -qq update \
   && rm -rf /var/lib/apt/lists/*
 
 # Install Android SDK
-RUN wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VERSION.zip -q \
+RUN wget https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip -q \
   && mkdir /usr/local/android \
-  && unzip -q sdk-tools-linux-$ANDROID_SDK_VERSION.zip -d /usr/local/android \
-  && rm sdk-tools-linux-$ANDROID_SDK_VERSION.zip
+  && unzip -q commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip -d /usr/local/android \
+  && rm commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip
 
 # Export JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64

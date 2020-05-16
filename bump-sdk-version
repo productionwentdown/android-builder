@@ -23,19 +23,19 @@ echo "+ Assuming platform version $PLATFORM_VERSION"
 
 echo "+ Replacing ANDROID_SDK_VERSION in Dockerfile"
 
-sed -i '' "s/ENV ANDROID_SDK_VERSION .*/ENV ANDROID_SDK_VERSION $ANDROID_SDK_VERSION/" \
+sed -i "s/ENV ANDROID_SDK_VERSION .*/ENV ANDROID_SDK_VERSION $ANDROID_SDK_VERSION/" \
     Dockerfile \
     ndk/Dockerfile
 
 echo "+ Replacing BUILD_TOOLS_VERSION in Dockerfile"
 
-sed -i '' "s/ENV BUILD_TOOLS_VERSION .*/ENV BUILD_TOOLS_VERSION $BUILD_TOOLS_VERSION/" \
+sed -i "s/ENV BUILD_TOOLS_VERSION .*/ENV BUILD_TOOLS_VERSION $BUILD_TOOLS_VERSION/" \
     Dockerfile \
     ndk/Dockerfile
 
 echo "+ Replacing PLATFORM_VERSION in Dockerfile"
 
-sed -i '' "s/ENV PLATFORM_VERSION .*/ENV PLATFORM_VERSION $PLATFORM_VERSION/" \
+sed -i "s/ENV PLATFORM_VERSION .*/ENV PLATFORM_VERSION $PLATFORM_VERSION/" \
     Dockerfile \
     ndk/Dockerfile
 

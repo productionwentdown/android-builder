@@ -1,0 +1,15 @@
+name: Bump Android SDK version
+
+on:
+  schedule:
+  - cron: "12 0 * * *"
+
+jobs:
+  bump_caddy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Bump and commit
+      run: ./bump-sdk-version

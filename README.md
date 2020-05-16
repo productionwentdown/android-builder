@@ -3,6 +3,8 @@
 
 Docker image to build Android apps.
 
+> For something more robust, see [thyrlian/AndroidSDK](https://github.com/thyrlian/AndroidSDK)
+
 # Usage
 
 ```

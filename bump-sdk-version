@@ -2,7 +2,7 @@
 
 echo "+ Scraping SDK website for version number"
 
-ANDROID_SDK_VERSION=$(curl --silent https://developer.android.com/studio/ | grep -m 1 -o 'sdk-tools-linux-\d*' | cut -f 4 -d -)
+ANDROID_SDK_VERSION=$(curl --silent https://developer.android.com/studio/ | grep -m 1 -oE 'commandlinetools-linux-[0-9]+' | cut -d - -f 3)
 if [ -z "$ANDROID_SDK_VERSION" ]; then
     echo "Version not found"
     exit 1
@@ -11,7 +11,7 @@ echo "+ Found version $ANDROID_SDK_VERSION"
 
 echo "+ Scraping Android repository-12.xml for build tools"
 
-BUILD_TOOLS_VERSION=$(curl --silent https://dl.google.com/android/repository/repository-12.xml | grep -o "build-tools_r\d*\.\d*\.\d*" | cut -f 2 -d r | sort -r | head -n 1)
+BUILD_TOOLS_VERSION=$(curl --silent https://dl.google.com/android/repository/repository-12.xml | grep -oE "build-tools_r[0-9]+\.[0-9]+\.[0-9]+" | cut -f 2 -d r | sort -r | head -n 1)
 if [ -z "$BUILD_TOOLS_VERSION" ]; then
     echo "Version not found"
     exit 1
